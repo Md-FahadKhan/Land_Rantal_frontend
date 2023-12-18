@@ -79,11 +79,11 @@ const ManagerDashboard = () => {
   };
   
   return (
-    <div className="bg-gray-800 text-white min-h-screen py-12">
+    <div className="bg-[#F1EFF0] text-white min-h-screen py-12">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center">Manager Dashboard</h2>
+        <h2 className="text-3xl font-bold mb-3 text-center text-[#34495e]">Manager Dashboard</h2>
 
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <table className="min-w-full border rounded-md">
             <thead>
               <tr className="bg-gray-700 text-white">
@@ -94,7 +94,7 @@ const ManagerDashboard = () => {
                 <th className="py-2">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-gray-800 text-center">
+            <tbody className="bg-[#dcdde1] text-[#34495e] text-center">
   {allProducts.length > 0 ? (
     allProducts.map((product) => (
       <tr key={product.productId}>

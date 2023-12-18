@@ -79,11 +79,11 @@ const LandPost = () => {
   };
   
   return (
-    <div className="bg-gray-800 text-white min-h-screen py-12">
+    <div className="bg-[#F1EFF0] text-white min-h-screen py-12">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center">Land Post</h2>
+        <h2 className="text-3xl font-bold mb-2 text-center text-gray-700">Land Post</h2>
 
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <table className="min-w-full border rounded-md">
             <thead>
               <tr className="bg-gray-700 text-white">
@@ -99,7 +99,7 @@ const LandPost = () => {
                 <th className="py-2">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-gray-800 text-center">
+            <tbody className="bg-[#dcdde1] text-gray-800 text-center">
   {allLandpost.length > 0 ? (
     allLandpost.map((product) => (
       <tr key={product.landid}>

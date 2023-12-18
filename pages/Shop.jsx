@@ -16,6 +16,7 @@ const Shop = () => {
 
   return (
     <div className="container mx-auto mt-12 mb-20 w-[1100px]">
+      <h2 className="text-3xl font-bold mb-3 text-center text-[#34495e]">Shop Here</h2>
       <div className="flex space-x-52 justify-between items-center mb-8 ">
         <div className="flex items-center space-x-4">
           <div className="relative">

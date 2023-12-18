@@ -12,12 +12,14 @@ export default function App({ Component, pageProps }) {
   const isLoginPage = router.pathname === '/Login';
   const isSignUpPage = router.pathname === '/Signup';
   const isManager = router.pathname === '/Manager';
+  const isLandPost = router.pathname === '/LandPost';
+  const isEmail = router.pathname === '/SendEmail';
   const isManagerDashboard = router.pathname === '/ManagerDashboard';
 
 
   return (
     <ShopContextProvider>
-      {!isLoginPage && !isSignUpPage && !isManager && !isManagerDashboard && <Navbar />}
+      {!isLoginPage && !isSignUpPage && !isManager && !isManagerDashboard && !isLandPost && !isEmail &&<Navbar />}
 
       <AuthProvider>
       <Component {...pageProps} />

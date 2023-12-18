@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
+import { useAuth } from './authcontext';
 
 const SendEmail = () => {
   const router = useRouter();
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [text, setText] = useState('');
+  const { checkUser } = useAuth();
+  const user = checkUser();
 
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');

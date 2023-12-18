@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
+import { useAuth } from './authcontext';
 
 const AddProduct = () => {
   const router = useRouter();
@@ -10,6 +11,8 @@ const AddProduct = () => {
   const [product_picture, setProduct_picture] = useState(null);
   const [error, setError] = useState('');
   const [formErrors, setFormErrors] = useState({});
+  const { checkUser } = useAuth();
+  const user = checkUser();
 
   const handleProductChange = (e) => {
     setProduct(e.target.value);

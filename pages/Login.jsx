@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
 import { useAuth } from "./authcontext";
+import Header from "./compo/header"
 
 const Login = () => {
   const { login } = useAuth(); 
@@ -87,9 +88,12 @@ const Login = () => {
   };
   
   return (
+    
     <div className="flex justify-center items-center h-screen bg-gray-100">
+      
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <Header />
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-semibold text-gray-600 mb-1">

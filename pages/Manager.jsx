@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineShop, AiOutlineShoppingCart, AiOutlineUser, AiOutlineEnvironment } from 'react-icons/ai';
-import { MdNotifications } from 'react-icons/md';
+import { MdNotifications,MdDelete } from 'react-icons/md';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -15,10 +16,24 @@ const Manager = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [profile, setProfile] = useState({});
   const [allProducts, setAllProducts] = useState(0);
+  const [allNotification, setAllNotification] = useState([]);
   const [error, setError] = useState('');
   const router = useRouter();
   const { checkUser } = useAuth();
   const user = checkUser();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  // const [notifications, setNotifications] = useState([
+  //   'Notification 1',
+  //   'Notification 2',
+  //   'Notification 3',
+  //   'Notification 3',
+  // ]);
+
+
+  const toggleDropdown = (event) => {
+    event.stopPropagation();
+    setDropdownOpen(!isDropdownOpen);
+  };
 
   useEffect(() => {
     // Check if the user is authenticated before fetching the profile
@@ -26,11 +41,37 @@ const Manager = () => {
       GetProfile();
       GetProducts();
       GetLandpost();
+      GetNotification();
     } else {
       // Redirect to login page or handle unauthenticated user
-      // router.push('/Login');
+      router.push('/Login');
     }
   }, [user]);
+
+  const GetNotification = async () => {
+    try {
+      const response = await axios.get('http://localhost:7000/manager/notification', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response.data);
+      console.log(response.success);
+      if (response.data) {
+        console.log('notification:', response.data);
+        console.log(response.data.data);
+        setAllNotification(response.data);
+      } else {
+        console.log('No products available');
+        setError('No products available');
+      }
+    } catch (error) {
+      console.error('Failed:', error);
+      setError(`An error occurred trying to fetch products: ${error.message}`);
+    }
+  };
+
+  // http://localhost:7000/manager/notification
 
   const GetProducts = async () => {
     try {
@@ -103,6 +144,30 @@ const Manager = () => {
       setError(`An error occurred trying to fetch profile: ${error.message}`);
     }
   };
+
+  const handleDeleteClick = async (Serial) => {
+    console.log(`Delete clicked for product with ID: ${Serial}`);
+    try {
+      const respons = await axios.delete(`http://localhost:7000/manager/deleteNotification/${Serial}`);
+
+      GetNotification();
+      if (respons.data.success) {
+        console.log('Notification deleted successfully');
+        
+        // Update the UI state to remove the deleted product
+        setAllNotification(prevNotification => prevNotification.filter(notification => notification.Serial !== Serial));
+      } else {
+        
+        console.log('Failed to delete notification');
+        
+        setError('Failed to delete notification');
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
+      setError(`An error occurred while deleting the notification: ${error.message}`);
+    }
+  };
+  
   
 
   return (
@@ -133,7 +198,7 @@ const Manager = () => {
       {/* Header */}
       <header className="col-span-12 bg-gradient-to-r from-[#2c3e50] to-[#34495e] text-white p-4 flex justify-between items-center  shadow-md">
         
-        <nav className="flex space-x-4">
+        <nav className="flex space-x-4 ">
   <Link href="/">
     <div className="hover:text-yellow-300 transition duration-300 cursor-pointer">
       Home
@@ -169,18 +234,41 @@ const Manager = () => {
       Logout
     </div>
   </Link>
-  <Link href="/Notification">
-      <div className="relative">
-        <div className="hover:text-yellow-300 transition duration-300 cursor-pointer">
-          <MdNotifications size={22} color="white" />
-        </div>
-        {/* {count > 0 && ( */}
-          <div className="absolute bottom-3 right-2 bg-red-500 text-white rounded-full px-1 text-xs">
-            {/* {count} */}<p>3</p>
-          </div>
-        {/* )} */}
+  
+  <div className="notification-container relative">
+  <div className="hover:text-yellow-300 transition duration-300 cursor-pointer" onClick={toggleDropdown}>
+    <MdNotifications size={22} color="white" />
+    {allNotification && allNotification.length > 0 && (
+      <div className="absolute top-1 right-3 bg-red-500 text-white rounded-full px-1 text-xs">
+        {allNotification.length}
       </div>
-    </Link>
+    )}
+  </div>
+
+  {isDropdownOpen && allNotification.length > 0 && (
+    <div className="notification-card absolute top-full right-1 bg-[#2d3436] border border-gray-300 shadow-md rounded-md p-2 mt-5 w-80">
+      <div className="flex items-center justify-between font-bold border-b pb-2 mb-2">
+        <span>Notifications</span>
+        <MdNotifications size={18} color="#333" />
+      </div>
+      <table className="w-full text-[10px]">
+        <tbody>
+          {allNotification.map((notification) => (
+            <tr key={notification.Serial} className="p-2 border rounded hover:bg-blue cursor-pointer">
+              <td>{notification.Message}</td>
+              <td>{notification.time}</td>
+              {console.log("time" + notification.Message)}
+              {console.log("time" + notification.time)}
+              <td>{notification.date}</td>
+              <td><MdDelete size={22} color="#ff6b6b" onClick={() => handleDeleteClick(notification.Serial)} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+
  
 </nav>
 <div className="flex items-center cursor-pointer" onClick={() => setShowProfile(!showProfile)}>
