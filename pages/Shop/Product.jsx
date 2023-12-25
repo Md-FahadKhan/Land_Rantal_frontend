@@ -3,16 +3,17 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ShopContext } from "../shop-context";
 
+
 const Product = (props) => {
   const { id, productName, Price, productImage, productDescription } = props.data;
   const router = useRouter();
-  const { addToCart } = useContext(ShopContext);
+  const { addToCart , cartItems } = useContext(ShopContext);
 
   const handleDetailsClick = () => {
     console.log(id);
     router.push(`./details/${id}`);
   };
-
+  const cartItemCount = cartItems[id];
   return (
     <div className="product max-h-[300px] flex items-start text-left">
   <div className="image-container">
@@ -30,9 +31,9 @@ const Product = (props) => {
       {productDescription}
     </span>
 
-    <div className="button w-[160px]">
+    <div className="button w-[160px] ">
   <button className="addToCartBtn text-sm mt-0 mb-0 w-[160px] h-6 flex items-center" onClick={() => addToCart(id)}>
-    <span className="mx-auto">Add To Cart</span>
+    <span className="mx-auto">Add To Cart{cartItemCount > 0 && <> ({cartItemCount})</>}</span>
   </button>
 
   <button className="addToCartBtn text-sm mt-0 mb-0 w-[160px] h-6 flex items-center" onClick={handleDetailsClick}>

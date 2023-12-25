@@ -44,8 +44,8 @@ const GraphChart = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center p-8 w-[500px] ">
-      <div className="bg-white p-2 rounded shadow-md w-[500px]">
+    <div className="flex justify-center items-center w-[380px] ">
+      <div className="bg-white p-2 rounded shadow-md w-[380px]">
         <h2 className="text-2xl font-bold mb-2 text-center text-gray-800">Sales Chart for Pruduct</h2>
         <canvas ref={chartRef} className="w-full h-64" />
       </div>

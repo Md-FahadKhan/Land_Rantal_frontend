@@ -517,7 +517,7 @@ if (formData.firstName.trim() === "") {
             Sign Up
           </button>
         </form>
-        <Link href="/Login"><h6 className="text-blue-500 text-center ">Already have an account? Login here.</h6></Link>
+        <Link href="/Auth/Login"><h6 className="text-blue-500 text-center ">Already have an account? Login here.</h6></Link>
         
       </div>
     </div>

@@ -37,10 +37,10 @@ const PieChart = () => {
   }, [data]);
 
   return (
-    <div className="flex justify-center items-center p-4"> {/* Reduced padding */}
-    <div className="bg-white p-2 rounded shadow-md">
+    <div className="flex justify-center items-center w-[300px]"> {/* Reduced padding */}
+    <div className="bg-white p-2 rounded shadow-md w-[300px]">
       <h2 className="text-2xl font-bold mb-2 text-center text-gray-800">Sales Distribution for Products</h2>
-      <Pie ref={chartRef} data={data} width={200} height={200} /> {/* Adjust width and height as needed */}
+      <Pie ref={chartRef} data={data} width={100} height={100} /> {/* Adjust width and height as needed */}
     </div>
   </div>
   );

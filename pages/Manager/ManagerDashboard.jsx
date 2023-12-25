@@ -3,22 +3,24 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import UserNav from './UserNav';
 
 
-const LandPost = () => {
+const ManagerDashboard = () => {
     const router = useRouter();
-  const [allLandpost, setAllLandpost] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [showProfile, setShowProfile] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     // Fetch products when the component mounts
-    GetLandpost();
+    GetProducts();
   }, []);
 
-  const GetLandpost = async () => {
+  const GetProducts = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:7000/manager/getAllLandPost',
+        'http://localhost:7000/manager/getAllProduct',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ const LandPost = () => {
       if (response.data.success) {
         console.log('Products:', response.data);
         console.log(response.data.data);
-        setAllLandpost(response.data.data);
+        setAllProducts(response.data.data);
       } else {
         console.log('No products available');
         setError('No products available');
@@ -44,28 +46,28 @@ const LandPost = () => {
   const handleEditClick = (product) => {
 
     router.push({
-        pathname: '/EditLandPost',
+        pathname: '/Manager/EditProduct',
         query: {
-          landid: product.landid,
-          landname: product.landname,
+          productId: product.productId,
+          name: product.name,
           price: product.price,
-          description: product.description,
+          descripton: product.description,
         },
       });
       
   };
 
-  const handleDeleteClick = async (landid) => {
-    console.log(`Delete clicked for product with ID: ${landid}`);
+  const handleDeleteClick = async (productId) => {
+    console.log(`Delete clicked for product with ID: ${productId}`);
     try {
-      const respons = await axios.delete(`http://localhost:7000/manager/deleteland/${landid}`);
+      const respons = await axios.delete(`http://localhost:7000/manager/deleteProduct/${productId}`);
 
-      GetLandpost();
+      GetProducts();
       if (respons.data.success) {
         console.log('Product deleted successfully');
         
         // Update the UI state to remove the deleted product
-        setAllLandpost(prevProducts => prevProducts.filter(product => product.landid !== landid));
+        setAllProducts(prevProducts => prevProducts.filter(product => product.productId !== productId));
       } else {
         
         console.log('Failed to delete product');
@@ -79,39 +81,36 @@ const LandPost = () => {
   };
   
   return (
-    <div className="bg-[#F1EFF0] text-white min-h-screen py-12">
+    <div>
+    <UserNav />
+    <div className= 'col-span-12 bg-[#dfe4ea] text-[#192a56] pr-8 pl-8 shadow-md '>
+        
+    <div className="bg-[#dfe4ea] text-white min-h-screen ">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-2 text-center text-gray-700">Land Post</h2>
+        <h2 className="text-3xl font-bold mb-3 text-center text-[#192a56]">Manage product</h2>
 
         <div className="mt-4 overflow-x-auto">
           <table className="min-w-full border rounded-md">
             <thead>
               <tr className="bg-gray-700 text-white">
-                <th className="py-2">Land Name</th>
-                
-                <th className="py-2"> Description</th>
-                {/* <th className="py-2">Product picture</th> */}
-
-                <th className="py-2">Location</th>
-                <th className="py-2">Size</th>
-                <th className="py-2">Price</th>
-                <th className="py-2">Picture</th>
+                <th className="py-2">Product Name</th>
+                <th className="py-2">Product Price</th>
+                <th className="py-2">Product Description</th>
+                <th className="py-2">Product picture</th>
                 <th className="py-2">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-[#dcdde1] text-gray-800 text-center">
-  {allLandpost.length > 0 ? (
-    allLandpost.map((product) => (
-      <tr key={product.landid}>
-        <td className="py-2">{product.landname}</td>
-        <td className="py-2">${product.description}</td>
-        <td className="py-2">${product.location}</td>
-        <td className="py-2">${product.size}</td>
+            <tbody className="bg-[#e5eaef] text-[#34495e] text-center">
+  {allProducts.length > 0 ? (
+    allProducts.map((product) => (
+      <tr key={product.productId}>
+        <td className="py-2">{product.name}</td>
         <td className="py-2">${product.price}</td>
+        <td className="py-2">${product.description}</td>
         <td className="py-2">
           {/* Dynamically generate the image URL */}
           <img
-            src={`http://localhost:7000/manager/getlandimage/${product.picture}`}
+            src={`http://localhost:7000/manager/getproductimage/${product.picture}`}
             alt={product.name}
             className="w-16 h-16 object-cover rounded-sm ml-32"
           />
@@ -119,13 +118,13 @@ const LandPost = () => {
         <td className="py-2">
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer mr-2"
-            onClick={() => handleEditClick(product.landid)}
+            onClick={() => handleEditClick(product)}
           >
             Edit
           </button>
           <button
             className="bg-red-500 hover.bg-red-600 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer"
-            onClick={() => handleDeleteClick(product.landid)}
+            onClick={() => handleDeleteClick(product.productId)}
           >
             Delete
           </button>
@@ -143,17 +142,17 @@ const LandPost = () => {
 
         <div className="flex space-x-4 justify-center mt-5">
           {/* Add Product */}
-          <Link href="/AddLand">
+          <Link href="/Manager/AddProduct">
             <div className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition duration-300 cursor-pointer">
-              Add LandPost
+              Add Product
             </div>
           </Link>
-
-         
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
 
-export default LandPost;
+export default ManagerDashboard;

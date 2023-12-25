@@ -3,6 +3,13 @@ import Image from 'next/image';
 import 'typeface-lobster';
 
 const Navbar = () => {
+  // const [searchTerm, setSearchTerm] = useState("");
+
+  // const handleSearch = (value) => {
+  //   const lowerCaseTerm = value.toLowerCase();
+  //   setSearchTerm(lowerCaseTerm);
+  // }
+
   return (
     <div className="bg-white text-[#006266] p-6 text-sm font-Poppins">
       <div className="container mx-auto flex items-center justify-center">
@@ -29,29 +36,31 @@ const Navbar = () => {
               <Link href="/">Home</Link>
             </li>
             <li className="mr-4">
-              <Link href="/About">About</Link>
+              <Link href="/Website/About">About</Link>
             </li>
             <li className="mr-4">
-              <Link href="/Contact">Contact</Link>
+              <Link href="/Website/Contact">Contact</Link>
             </li>
             <li className="mr-4">
               <Link href="/Shop">Shop</Link>
             </li>
             <li className="mr-4">
-              <Link href="/Service">Service</Link>
+              <Link href="/Website/Service">Service</Link>
             </li>
             <li className="mr-4">
-              <Link href="/News">News</Link>
+              <Link href="/Website/News">News</Link>
             </li>
           </ul>
         </div>
         <div className="text-center flex mr-10">
           <input
             type="text"
-            placeholder="Search here"
+            placeholder="Find Land"
+            // value={searchTerm}
+            //   onChange={(e) => handleSearch(e.target.value)}
             className="text-red border border-solid border-green-600 rounded-full mr-4 text-center"
           />
-          <Link href="/Signup" className='text-[#006266] text-lg font-Poppins font-bold'>Signup</Link>
+          <Link href="/Auth/Signup" className='text-[#006266] text-lg font-Poppins font-bold'>Signup</Link>
           
         </div>
       </div>
