@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
 
+
 const SendEmail = () => {
   const router = useRouter();
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [text, setText] = useState('');
+
+
 
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -100,9 +103,12 @@ const SendEmail = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 ">
+    <div>
+     
+   
+    <div className="flex justify-center items-center h-[90vh] bg-[#dfe4ea] ">
     <div className="bg-white p-8 rounded shadow-md w-96">
-      <h2 className="text-2xl font-bold mb-6">Send Email</h2>
+      <h2 className="text-2xl font-bold mb-6">Send Email To the Manager</h2>
       {successMessage && <p className="text-green-500 text-lg font-bold">{successMessage}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-2">
@@ -158,7 +164,8 @@ const SendEmail = () => {
           {formErrors.text && (
             <p className="text-red-500 text-sm mt-1">{formErrors.text}</p>
           )}
-        </div>
+        </div> 
+        <div className="flex flex-row">
         <button
           type="submit"
           className={`bg-blue-500 text-white align-middle px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300 ${isLoading ? 'cursor-wait' : ''}`}
@@ -166,9 +173,12 @@ const SendEmail = () => {
         >
           {isLoading ? 'Loading...' : 'Send'}
         </button>
+        <h1 className="ml-6 mt-2 font-semibold text-green-800">Phone:0170154305</h1>
+        </div>
       </form>
       {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
+  </div>
   </div>
   );
 };

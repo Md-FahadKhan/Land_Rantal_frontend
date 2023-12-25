@@ -11,7 +11,7 @@ li {
 
 body {
   font-family: "Arial", sans-serif;
-  background: radial-gradient(#fff, #ffd6d6);
+  background: #F1EFF0;
 }
 
 /* Center the entire content */
@@ -91,7 +91,7 @@ body {
 
 /* Updated button styles */
 .addToCartBtn {
-  background-color: #218c74;
+  background-color: #36a089;
   color: #fff;
   width: 100%;
   padding: 12px;

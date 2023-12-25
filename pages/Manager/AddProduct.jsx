@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
+import UserNav from "./UserNav";
 
 const AddProduct = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const AddProduct = () => {
   const [product_picture, setProduct_picture] = useState(null);
   const [error, setError] = useState('');
   const [formErrors, setFormErrors] = useState({});
+  
 
   const handleProductChange = (e) => {
     setProduct(e.target.value);
@@ -81,6 +83,9 @@ const AddProduct = () => {
     }
   };
   return (
+    <div>
+    <UserNav />
+    <div className='col-span-12 bg-[#dfe4ea] text-[#192a56] p-8 shadow-md'>
     <div className="flex justify-center items-center h-screen bg-gray-100 mt-1">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6">ADD PRODUCT</h2>
@@ -165,6 +170,8 @@ const AddProduct = () => {
         </form>
         {error && <p className="text-red-500 mt-4">{error}</p>}
       </div>
+    </div>
+    </div>
     </div>
   );
 };

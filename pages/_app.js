@@ -9,15 +9,25 @@ import "./Cart/cart.css"
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const isLoginPage = router.pathname === '/Login';
-  const isSignUpPage = router.pathname === '/Signup';
-  const isManager = router.pathname === '/Manager';
-  const isManagerDashboard = router.pathname === '/ManagerDashboard';
+  const isLoginPage = router.pathname === '/Auth/Login';
+  const isSignUpPage = router.pathname === '/Auth/Signup';
+  const isManager = router.pathname === '/Manager/Manager';
+  const isLandPost = router.pathname === '/Manager/LandPost';
+  const isEmail = router.pathname === '/Manager/SendEmail';
+  const isSeller = router.pathname === '/Manager/SellerDashboard';
+  const isUserNav = router.pathname === '/Manager/UserNav';
+  const isEditProfile = router.pathname === '/Manager/EditProfile';
+  const isSellerNav = router.pathname === '/Seller/SellerNav';
+  const isSel = router.pathname === '/Seller/Seller';
+  const isSellerProduct = router.pathname === '/Seller/SellerProduct';
+
+
+  const isManagerDashboard = router.pathname === '/Manager/ManagerDashboard';
 
 
   return (
     <ShopContextProvider>
-      {!isLoginPage && !isSignUpPage && !isManager && !isManagerDashboard && <Navbar />}
+      {!isLoginPage && !isSignUpPage && !isManager && !isManagerDashboard && !isLandPost && !isEmail && !isUserNav && !isSeller && !isEditProfile && !isSellerNav&& !isSel &&!isSellerProduct&&<Navbar />}
 
       <AuthProvider>
       <Component {...pageProps} />

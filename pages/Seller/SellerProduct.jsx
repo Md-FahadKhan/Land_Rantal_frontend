@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import SellerNav from './SellerNav';
 
 
-const ManagerDashboard = () => {
+
+const SellerProduct = () => {
     const router = useRouter();
   const [allProducts, setAllProducts] = useState([]);
+  const [showProfile, setShowProfile] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -44,7 +47,7 @@ const ManagerDashboard = () => {
   const handleEditClick = (product) => {
 
     router.push({
-        pathname: '/EditProduct',
+        pathname: '/Manager/EditProduct',
         query: {
           productId: product.productId,
           name: product.name,
@@ -79,11 +82,15 @@ const ManagerDashboard = () => {
   };
   
   return (
-    <div className="bg-gray-800 text-white min-h-screen py-12">
+    <div>
+    <SellerNav />
+    <div className= 'col-span-12 bg-[#dfe4ea] text-[#192a56] pr-8 pl-8 shadow-md '>
+        
+    <div className="bg-[#dfe4ea] text-white min-h-screen ">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center">Manager Dashboard</h2>
+        <h2 className="text-3xl font-bold mb-3 text-center text-[#192a56]">Manage product</h2>
 
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <table className="min-w-full border rounded-md">
             <thead>
               <tr className="bg-gray-700 text-white">
@@ -94,7 +101,7 @@ const ManagerDashboard = () => {
                 <th className="py-2">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-gray-800 text-center">
+            <tbody className="bg-[#e5eaef] text-[#34495e] text-center">
   {allProducts.length > 0 ? (
     allProducts.map((product) => (
       <tr key={product.productId}>
@@ -136,17 +143,17 @@ const ManagerDashboard = () => {
 
         <div className="flex space-x-4 justify-center mt-5">
           {/* Add Product */}
-          <Link href="/AddProduct">
+          <Link href="/Manager/AddProduct">
             <div className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition duration-300 cursor-pointer">
               Add Product
             </div>
           </Link>
-
-         
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
 
-export default ManagerDashboard;
+export default SellerProduct;

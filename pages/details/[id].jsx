@@ -34,11 +34,11 @@ const Details = () => {
           alt={product.productName}
           className="w-full rounded-t-md overflow-hidden"
         />
-        <div className="p-20 text-center">
-          <h1 className="text-3xl mb-4 text-gray-800">{product.productName}</h1>
-          <p className="text-2xl mb-2 text-red-600">Price: ${product.Price}</p>
+        <div className="p-6 text-center">
+          <h1 className="text-3xl mb-2 font-bold text-gray-800">{product.productName}</h1>
+          <p className="text-2xl mb-2 text-blue-600">Price: ${product.Price}</p>
           <p className="text-lg leading-6 text-gray-700">
-            Description: {product.productDescription}
+           <span className="font-bold">Description:</span>  {product.productDescription}
           </p>
           {/* Add more details as needed */}
         </div>

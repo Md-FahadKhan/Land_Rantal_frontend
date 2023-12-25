@@ -291,7 +291,7 @@ if (formData.firstName.trim() === "") {
     
 
   return (
-    <div className="flex justify-center items-center h-[110vh] bg-gradient-to-r from-[#079992] to-[#38ada9]">
+    <div className="flex justify-center items-center h-[110vh] bg-gradient-to-r from-[#a1b0af] to-[#beebe9]">
       <div className="max-h-[110vh] rounded shadow-md">
       <Image
           src="/Assets/Signup.jpg" // Adjust the path based on your project structure
@@ -517,7 +517,7 @@ if (formData.firstName.trim() === "") {
             Sign Up
           </button>
         </form>
-        <Link href="/Login"><h6 className="text-blue-500 text-center ">Already have an account? Login here.</h6></Link>
+        <Link href="/Auth/Login"><h6 className="text-blue-500 text-center ">Already have an account? Login here.</h6></Link>
         
       </div>
     </div>
