@@ -10,6 +10,7 @@ import { useAuth } from '../authcontext';
 import GraphChart from './GraphChart';
 import LineGraph from './LineGraph';
 import PieChart from './PieChart';
+import SessionCheck from '../Session';
 
 const UserNav = () => {
   const [allLandpost, setAllLandpost] = useState(0);
@@ -140,6 +141,7 @@ const UserNav = () => {
     ) : (
       <p></p>
     )}
+    <SessionCheck></SessionCheck>
    
  
 

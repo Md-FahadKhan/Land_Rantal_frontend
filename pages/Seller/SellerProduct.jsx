@@ -47,7 +47,7 @@ const SellerProduct = () => {
   const handleEditClick = (product) => {
 
     router.push({
-        pathname: '/Manager/EditProduct',
+        pathname: '/Seller/EditProduct',
         query: {
           productId: product.productId,
           name: product.name,
@@ -64,7 +64,7 @@ const SellerProduct = () => {
       const respons = await axios.delete(`http://localhost:7000/manager/deleteProduct/${productId}`);
 
       GetProducts();
-      if (respons.data.success) {
+      if (respons.data) {
         console.log('Product deleted successfully');
         
         // Update the UI state to remove the deleted product
@@ -143,7 +143,7 @@ const SellerProduct = () => {
 
         <div className="flex space-x-4 justify-center mt-5">
           {/* Add Product */}
-          <Link href="/Manager/AddProduct">
+          <Link href="/Seller/AddProduct">
             <div className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition duration-300 cursor-pointer">
               Add Product
             </div>
