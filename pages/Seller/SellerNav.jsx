@@ -143,9 +143,9 @@ const SellerNav = () => {
     */}
  
 
-    <div className="grid grid-cols-12 gap-3 pr-8 pl-8">
+    <div className="grid grid-cols-12 gap-3 pr-6 pl-6">
       {/* Header */}
-      <header className="col-span-12 bg-gradient-to-r from-[#035e3c] to-[#0f8371] text-white p-4 flex justify-between items-center  shadow-md">
+      <header className="col-span-12 bg-gradient-to-r from-[#245490] to-[#294c76] text-white p-4 flex justify-between items-center  shadow-md">
         
         <nav className="flex space-x-4 ">
   <Link href="/Seller/Seller">
@@ -161,7 +161,7 @@ const SellerNav = () => {
   
  
   <Link href="/Auth/Login">
-    <div className="hover:text-yellow-300 transition duration-300 cursor-pointer ml-80">
+    <div className="hover:text-yellow-300 transition duration-300 cursor-pointer ml-[800px]">
     
       Logout
     </div>

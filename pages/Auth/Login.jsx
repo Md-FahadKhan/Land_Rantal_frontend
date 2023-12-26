@@ -3,7 +3,6 @@ import axios from "axios";
 import { useRouter } from 'next/router';
 import { useAuth } from "../authcontext";
 
-
 const Login = () => {
   const { login } = useAuth(); 
   const [emailError, setEmailError] = useState("");
@@ -14,7 +13,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
   const [formErrors, setFormErrors] = useState({
     email: "",
     password: "",
